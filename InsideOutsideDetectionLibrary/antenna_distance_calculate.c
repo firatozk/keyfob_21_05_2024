@@ -13,7 +13,7 @@ int main() {
     double x3 = 205.0, y3 = 118.0, z3 = 61.0;  // Antenna 3
 
     // Coordinates of the point
-    double xp = 100, yp = 100 , zp = 100;
+    double xp = 200, yp = 150 , zp = 50;
 
     // Calculate distances
     double d1 = calculateDistance(x1, y1, z1, xp, yp, zp);
@@ -21,9 +21,10 @@ int main() {
     double d3 = calculateDistance(x3, y3, z3, xp, yp, zp);
 
     // Output the distances
-    printf("Distance to Antenna 1: %.3lf\n", d1);
+   /* printf("Distance to Antenna 1: %.3lf\n", d1);
     printf("Distance to Antenna 2: %.3lf\n", d2);
-    printf("Distance to Antenna 3: %.3lf\n", d3);
+    printf("Distance to Antenna 3: %.3lf\n", d3);*/
 
+    printf("r1 = %.4lf, r2 = %.4lf, r3 = %.4lf", d1, d2, d3);
     return 0;
 }

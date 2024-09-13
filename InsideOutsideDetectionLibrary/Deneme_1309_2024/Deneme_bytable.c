@@ -19,6 +19,11 @@ double dot(Point p1, Point p2) {
     return p1.x * p2.x + p1.y * p2.y + p1.z * p2.z;
 }
 
+// Function to calculate distance between two points in 3D space
+double calculateDistance(double x1, double y1, double z1, double x2, double y2, double z2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2) + pow(z2 - z1, 2));
+}
+
 // Function to calculate the cross product of two points
 Point cross(Point p1, Point p2) {
     Point result;
@@ -48,14 +53,17 @@ void findIntersectionAndPrint(Point P1, Point P2, Point P3, double r1, double r2
     double error_a = calculateError(p_12_a, P1, P2, P3, r1, r2, r3);
     double error_b = calculateError(p_12_b, P1, P2, P3, r1, r2, r3);
 
+    //printf("error a is:%f\n",error_a);
+    //printf("error b is:%f\n",error_b);
+    
     // Decide which point is more likely to be correct based on the error
-    if (error_a < error_b) {
-        printf("p_12_a is more likely the correct solution with less error.\n");
+    //if (error_a < error_b) {
+       // printf("p_12_a is more likely the correct solution with less error.\n");
         printf("p_12_a: (%f, %f, %f)\n", p_12_a.x, p_12_a.y, p_12_a.z);
-    } else {
-        printf("p_12_b is more likely the correct solution with less error.\n");
+    //} else {
+       // printf("p_12_b is more likely the correct solution with less error.\n");
         printf("p_12_b: (%f, %f, %f)\n", p_12_b.x, p_12_b.y, p_12_b.z);
-    }
+    //}
 
     // Check if the best point is inside the truck
     Point best_point = (error_a < error_b) ? p_12_a : p_12_b;
@@ -115,8 +123,27 @@ void trilaterate(Point P1, Point P2, Point P3, double r1, double r2, double r3, 
 }
 
 int main() {
-    Point P1 = {57, 120, 36}, P2 = {56, 128, 212}, P3 = {205, 118, 61};
-    double r1 = 126.53, r2 = 163.38, r3 = 172.16;
-    findIntersectionAndPrint(P1, P2, P3, r1, r2, r3);
+    Point P1 = {57.0, 120.0, 36.0}, P2 = {56.0, 128.0, 212.0}, P3 = {205.0, 118.0, 61.0};
+       // Coordinates of the three antennas
+    double Antenna_x1 = 57.0, Antenna_y1 = 120.0, Antenna_z1 = 36.0;  // Antenna 1
+    double Antenna_x2 = 56.0, Antenna_y2 = 128.0, Antenna_z2 = 212.0;  // Antenna 2
+    double Antenna_x3 = 205.0, Antenna_y3 = 118.0, Antenna_z3 = 61.0;  // Antenna 3
+
+    double xp = 200, yp = 150 , zp = 50; // Coordinates of the point
+    double r1,r2,r3;
+
+    for(int i=-100;i<=100;i++)
+    {
+        if(i % 10 == 0)
+        {
+                // Calculate distances
+                r1 = calculateDistance(Antenna_x1, Antenna_y1, Antenna_z1, xp+i, yp+i, zp+i);
+                r2 = calculateDistance(Antenna_x2, Antenna_y1, Antenna_z2, xp+i, yp+i, zp+i);
+                r3 = calculateDistance(Antenna_x3, Antenna_y3, Antenna_z3, xp+i, yp+i, zp+i);
+
+                findIntersectionAndPrint(P1, P2, P3, r1, r2, r3);
+                printf("coordinates of the point is equal to = %.4f,%.4f,%.4f\n",xp+i,yp+i,zp+i);
+        }
+    }    
     return 0;
 }
