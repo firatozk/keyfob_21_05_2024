@@ -117,9 +117,6 @@ void trilaterate(Point P1, Point P2, Point P3, double r1, double r2, double r3, 
 int main() {
     Point P1 = {57, 120, 36}, P2 = {56, 128, 212}, P3 = {205, 118, 61};
     double r1 = 126.53, r2 = 163.38, r3 = 172.16;
-    for(i=0;i<10;i++)
-    {
     findIntersectionAndPrint(P1, P2, P3, r1, r2, r3);
-    }
     return 0;
 }
