@@ -1,30 +1,29 @@
 #include <stdio.h>
 #include <math.h>
 
-struct Point {
-    double x;
-    double y;
-    double z;
-};
-
-double calculateDistance(struct Point point1, struct Point point2) {
-    return sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2) + pow(point1.z - point2.z, 2));
+// Function to calculate distance between two points in 3D space
+double calculateDistance(double x1, double y1, double z1, double x2, double y2, double z2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2) + pow(z2 - z1, 2));
 }
 
 int main() {
-    struct Point antenna1 = {57, 120, 36};
-    struct Point antenna2 = {56, 128, 212};
-    struct Point antenna3 = {205, 118, 61};
+    // Coordinates of the three antennas
+    double x1 = 57.0, y1 = 120.0, z1 = 36.0;  // Antenna 1
+    double x2 = 56.0, y2 = 128.0, z2 = 212.0;  // Antenna 2
+    double x3 = 205.0, y3 = 118.0, z3 = 61.0;  // Antenna 3
 
-    struct Point targetPoint = {200, 200, 200};
+    // Coordinates of the point
+    double xp = 100, yp = 100 , zp = 100;
 
-    double distance_antenna1 = calculateDistance(targetPoint, antenna1);
-    double distance_antenna2 = calculateDistance(targetPoint, antenna2);
-    double distance_antenna3 = calculateDistance(targetPoint, antenna3);
+    // Calculate distances
+    double d1 = calculateDistance(x1, y1, z1, xp, yp, zp);
+    double d2 = calculateDistance(x2, y2, z2, xp, yp, zp);
+    double d3 = calculateDistance(x3, y3, z3, xp, yp, zp);
 
-    printf("Distance to antenna 1: %.2f\n", distance_antenna1);
-    printf("Distance to antenna 2: %.2f\n", distance_antenna2);
-    printf("Distance to antenna 3: %.2f\n", distance_antenna3);
+    // Output the distances
+    printf("Distance to Antenna 1: %.3lf\n", d1);
+    printf("Distance to Antenna 2: %.3lf\n", d2);
+    printf("Distance to Antenna 3: %.3lf\n", d3);
 
     return 0;
 }
