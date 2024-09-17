@@ -24,7 +24,7 @@ double euclidean_distance_squared(double point[], double support_vector[], int n
 // Function to classify a point using the loaded SVM model
 int classify_point(double point[], double support_vectors[][NUM_FEATURES], double dual_coef[], double intercept, int num_support_vectors) {
     double decision_value = intercept;  // Start with the intercept term
-    double gamma = 1.0;  // Gamma for RBF kernel, adjust if necessary
+    double gamma = 1.0 / (2 * 0.5 * 0.5);  // Assuming gamma = 1 / (2 * sigma^2), adjust if necessary
 
     // Loop over all support vectors to compute the decision function
     for (int i = 0; i < num_support_vectors; i++) {
@@ -45,9 +45,9 @@ int main() {
     // In practice, these should be loaded from your model file
     double support_vectors[MAX_SUPPORT_VECTORS][NUM_FEATURES] = { /* Loaded from the file */ };
     double dual_coef[MAX_SUPPORT_VECTORS] = { /* Loaded from the file */ };
-    double intercept = -3.576245;  // Loaded from the file
-    double scaling_mean[NUM_FEATURES] = {119.772094, 104.726506, 104.034932};
-    double scaling_scale[NUM_FEATURES] = {86.566185, 78.831587, 75.253412};
+    double intercept = -7.674807801604399;  // Loaded from the file
+    double scaling_mean[NUM_FEATURES] = {117.26969587297378, 105.42107766390423, 103.21144933658398};
+    double scaling_scale[NUM_FEATURES] = {85.21044543938191, 78.37369414571265, 74.22180737314063};
     int num_support_vectors = 746;  // Loaded from the file
 
     // Scale the input point
